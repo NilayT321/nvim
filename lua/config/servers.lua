@@ -1,0 +1,8 @@
+vim.lsp.enable('pyright')
+vim.lsp.enable('clangd')
+vim.lsp.enable('texlab')
+vim.lsp.enable('hls')
+vim.lsp.enable('rust-analyzer')
+vim.lsp.enable('lemminx')
+vim.lsp.enable('html') 
+vim.lsp.enable('cssls')
