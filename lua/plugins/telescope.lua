@@ -8,10 +8,10 @@ return {
     },
 
     init = function() 
-	local builtin = require('telescope.builtin')
-	vim.keymap.set('n', '<localleader>ff', builtin.find_files, { desc = 'Telescope find files' })
-	vim.keymap.set('n', '<localleader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-	vim.keymap.set('n', '<localleader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-	vim.keymap.set('n', '<localleader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+		local builtin = require('telescope.builtin')
+		vim.keymap.set('n', '<localleader>ff', builtin.find_files, { desc = 'Telescope find files' })
+		vim.keymap.set('n', '<localleader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+		vim.keymap.set('n', '<localleader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+		vim.keymap.set('n', '<localleader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
     end
 }

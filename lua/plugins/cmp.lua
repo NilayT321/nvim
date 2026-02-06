@@ -21,7 +21,7 @@ return {
 	    },
 
 	    window = {
-	      completion = cmp.config.window.bordered(),
+	      completion = cmp.config.window.bordered({border = "single",}),
 	      documentation = cmp.config.window.bordered(),
 	    },
 	    

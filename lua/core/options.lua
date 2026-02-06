@@ -2,7 +2,10 @@
 vim.opt.number = true 
 vim.opt.showmode = false
 
+-- Tabs and indentation
 vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
 
 -- Disable netrw
 vim.g.loaded_netrw = 1
@@ -13,4 +16,4 @@ vim.opt.termguicolors = true
 
 -- Diagnostic messages disappeared for some reason? 
 -- Turn them back on 
-vim.diagnostic.config({virtual_text = true})
+vim.diagnostic.config({virtual_lines = true})
