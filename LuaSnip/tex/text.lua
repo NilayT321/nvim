@@ -2,8 +2,21 @@ return {
 
     -- Text in math mode
     s(
-        {trig = "!txt", snippetType = "autosnippet"},
-        fmta("\\text{<>}", {i(1)})
+        {trig = "txt",},
+        fmta("\\text{<>}", {i(1)}),
+        {condition = in_mathzone}
+    ),
+
+    -- Emphasized text 
+    s(
+        {trig = "emph",},
+        fmta("\\emph{<>}", {i(1)})
+    ),
+
+    -- Colored text 
+    s(
+        {trig = "colTxt",}, 
+        fmta("\\textcolor{<>}{<>}", {i(1), i(2)})
     ),
     
     -- Boldfaced text: should determine \mathbf or \textbf from context
@@ -16,6 +29,21 @@ return {
                     return "\\mathbf{" .. content .. "}"
                 else 
                     return "\\textbf{" .. content .. "}"
+                end
+            end)
+        }
+    ),
+
+    -- Italicized text in math/regular mode 
+    s(
+        {trig = "%{(.-)%}it", regTrig = true, wordTrig = false, priority = 2000},
+        {
+            f(function(_, snip)
+                local content = snip.captures[1] 
+                if in_mathzone() then 
+                    return "\\mathit{" .. content .. "}"
+                else 
+                    return "\\textit{" .. content .. "}"
                 end
             end)
         }
@@ -49,7 +77,7 @@ return {
     
     -- All greek letters.
     s(
-        {trig = ";([a-zA-Z]*)", regTrig = true, wordTrig = false, priority = 3000},
+        {trig = ";([%a]*)", regTrig = true, wordTrig = false, priority = 3000},
         {
             f(function(_, snip) 
                 local greek_letters = {

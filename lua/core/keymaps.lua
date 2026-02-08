@@ -12,3 +12,7 @@ vim.keymap.set('n', '<localleader>bn', '<cmd>bn <cr>')
 
 -- Toggle the filesystem tree (neotree) 
 vim.keymap.set('n', '<localleader>t', '<cmd>Neotree toggle <cr>')
+
+-- Folding 
+-- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+-- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)

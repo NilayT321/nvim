@@ -18,3 +18,9 @@ vim.opt.termguicolors = true
 -- Diagnostic messages disappeared for some reason? 
 -- Turn them back on 
 vim.diagnostic.config({virtual_lines = true})
+
+-- Folding 
+vim.o.foldcolumn = '1' 
+vim.o.foldlevel = 99 
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
