@@ -18,8 +18,11 @@ return {
         local s = ls.snippet 
         local t = ls.text_node 
         local f = ls.function_node
-        local function in_math()
-            return vim.fn["vimtex#syntax#in_mathzone"]() == 1
+
+        -- THis function checks to see if we're in math mode or not.
+        -- It is used to define some context-aware snippets
+        function in_mathzone()
+            return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
         end
 
         vim.keymap.set({ "i", "s" }, "<C-K>", function()
