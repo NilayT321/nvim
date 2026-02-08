@@ -7,26 +7,38 @@ return {
     build = "make install_jsregexp",
 
     opts = {
-	enable_autosnippets = true,
-	store_selection_keys = "<Tab>",
-	update_events = "TextChanged, TextChangedI"
+        enable_autosnippets = true,
+        store_selection_keys = "<Tab>",
+        update_events = "TextChanged, TextChangedI",
+        delete_check_events = "TextChanged, InsertLeave",
     },
 
     init = function() 
-	local ls = require("luasnip")
+        local ls = require("luasnip")
+        local s = ls.snippet 
+        local t = ls.text_node 
+        local f = ls.function_node
+        local function in_math()
+            return vim.fn["vimtex#syntax#in_mathzone"]() == 1
+        end
 
-	vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
-	vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
-	vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+        vim.keymap.set({ "i", "s" }, "<C-K>", function()
+          if ls.expand_or_jumpable() then
+            ls.expand_or_jump()
+          end
+        end, { silent = true })
 
-	vim.keymap.set({"i", "s"}, "<C-E>", function()
-		if ls.choice_active() then
-			ls.change_choice(1)
-		end
-	end, {silent = true})
+        vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+        vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
 
-	-- Lazy load snippets
-	require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
-	require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip"})
+        vim.keymap.set({"i", "s"}, "<C-E>", function()
+            if ls.choice_active() then
+                ls.change_choice(1)
+            end
+        end, {silent = true})
+
+        -- Lazy load snippets
+        require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+        require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip"})
     end
 }

@@ -4,20 +4,20 @@ return {
 
 -- Equation environment
 s(
-    {trig = "eqn", snippetType = "autosnippet"}, 
-    fmta(
-    [[
-	\begin{equation}
-	    <>
-	\end{equation}
-    ]], 
-	{i(1)}
+    {trig = "eqn",},
+        fmta(
+        [[
+        \begin{equation}
+            <>
+        \end{equation}
+        ]], 
+        {i(1)}
     )
 ),
 
 -- Starred equation environment
 s(
-    {trig = "neqn", snippetType = "autosnippet"}, 
+    {trig = "neqn",},
     fmta(
     [[
 	\begin{equation*}
@@ -30,7 +30,7 @@ s(
 
 -- Align environment
 s(
-    {trig = "algn", snippetType = "autosnippet"},
+    {trig = "algn",},
     fmta(
     [[
 	\begin{align*}
@@ -56,7 +56,7 @@ s(
 
 -- General environment
 s(
-    {trig = "!env", snippetType = "autosnippet"},
+    {trig = "env",},
     fmta(
     [[
 	\begin{<>}

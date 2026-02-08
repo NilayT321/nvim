@@ -4,78 +4,127 @@ return {
 
     -- Fractions
     s(
-	{trig = "ff", snippetType = "autosnippet"}, 
-	fmta("\\frac{<>}{<>}", {i(1), i(2)})
+        {trig = "//",}, 
+        fmta("\\frac{<>}{<>}", {i(1), i(2)})
     ),
 
     -- Sums
     s(
-	{trig = "ssum", snippetType = "autosnippet"}, 
-	fmta("\\sum_{<>}^{<>}", {i(1), i(2)})
+        {trig = "sum",},
+        fmta("\\sum_{<>}^{<>}", {i(1), i(2)})
     ),
 
     -- Product 
     s(
-	{trig = "pprod", snippetType = "autosnippet"},
-	fmta("\\prod_{<>}^{<>}", {i(1), i(2)})
+        {trig = "prod",},
+        fmta("\\prod_{<>}^{<>}", {i(1), i(2)})
     ),
 
     -- Integrals 
     s(
-	{trig = "!int", snippetType = "autosnippet"}, 
-	fmta("\\int_{<>}^{<>}", {i(1), i(2)})
+        {trig = "int"},
+        fmta("\\int_{<>}^{<>}", {i(1), i(2)})
+    ),
+
+    s(
+        {trig = "iint"},
+        fmta("\\iint_{<>}", {i(1)})
+    ),
+
+    s(
+        {trig = "iiint"},
+        fmta("\\iiint_{<>}", {i(1)})
+    ),
+
+    s(
+        {trig = "oint"},
+        fmta("\\oint_{<>}", {i(1)})
+    ),
+
+    s(
+        {trig = "oiint"},
+        fmta("\\oiint_{<>}", {i(1)})
     ),
 
     -- Limit
     s(
-	{trig = "llim", snippetType = "autosnippet"},
-	fmta("\\lim_{<>}", {i(1)})
+        {trig = "lim",},
+        fmta("\\lim_{<>}", {i(1)})
     ),
 
     -- Union of sets
     s(
-	{trig = "bigU", snippetType = "autosnippet"},
-	fmta("\\bigcup_{<>}^{<>}", {i(1), i(2)})
+        {trig = "Un",},
+        fmta("\\bigcup_{<>}^{<>}", {i(1), i(2)})
     ),
 
     -- Intersection of sets 
     s(
-	{trig = "bigI", snippetType = "autosnippet"},
-	fmta("\\bigcap_{<>}^{<>}", {i(1), i(2)})
+        {trig = "Int",},
+        fmta("\\bigcap_{<>}^{<>}", {i(1), i(2)})
     ),
 
     -- Left and right parentheses
     s(
-	{trig = "()", snippetType = "autosnippet"},
-	fmta("\\left( <> \\right)", {i(1)})
+        {trig = "lr(",},
+        fmta("\\left( <> \\right)", {i(1)})
     ),
 
-    -- -- Left and right square brackets
-    -- s(
-    -- 		{trig = "[]", snippetType = "autosnippet"},
-    -- 		fmta("\\left[ <> \\right]", {i(1)})
-    -- ),
+    -- Left and right square brackets
+    s(
+        {trig = "lr[",},
+        fmta("\\left[ <> \\right]", {i(1)})
+    ),
+
+    -- Left and right norm 
+    s(
+        {trig = "lr||",},
+        fmta("\\left\\| <> \\right\\|", {i(1)})
+    ),
+
+    -- Left and right curly brackets 
+    s(
+        {trig = "lr{",},
+        fmta("\\left\\{ <> \\right\\}", {i(1)})
+    ),
 
     -- Text in math mode
     s(
-	{trig = "!txt", snippetType = "autosnippet"},
-	fmta("\\text{<>}", {i(1)})
+        {trig = "!txt", snippetType = "autosnippet"},
+        fmta("\\text{<>}", {i(1)})
     ),
 
     -- Mathbf 
     s(
-	{trig = "!mbf", snippetType = "autosnippet"},
-	fmta("\\mathbf{<>}", {i(1)})
+        {trig = "!mbf", snippetType = "autosnippet"},
+        fmta("\\mathbf{<>}", {i(1)})
+    ),
+    
+    -- Arrows
+    -- Triggers for \xleftarrow{} and \xrightarrow{}
+    s(
+        {trig = "%{(.*)%}<%-", regTrig = true, wordTrig = false, priority = 2000},
+        {
+            t("\\xleftarrow{"),
+            f(function(_, snip) 
+                return snip.captures[1]
+            end),
+        }
     ),
 
-    -- RightArrow
     s(
-	{trig = "!->", snippetType = "autosnippet"},
-	fmta("\\xrightarrow{<>}", {i(1)})
+        {trig = "%{(.-)%}%->", regTrig = true, wordTrig = false, priority = 2000},
+        {
+            t("\\xrightarrow{"),
+            f(function(_, snip)
+                return snip.captures[1]
+            end),
+        }
     ),
 
+    -- Plain arrow
     s(
-	{trig = "!<-", snippetType = "autosnippet"},
-	fmta("\\xleftarrow{<>}", {i(1)})
+        {trig = "->", priority = 1000},
+        fmta("\\to", {})
     ),
 }

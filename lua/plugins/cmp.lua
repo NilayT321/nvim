@@ -50,7 +50,7 @@ return {
             end
         end, {'i', 's'}),
 
-        ['<C-k>'] = cmp.mapping(function(fallback)
+        ['<C-u>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                     cmp.scroll_docs(4)
             else
