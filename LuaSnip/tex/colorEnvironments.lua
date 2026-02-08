@@ -6,9 +6,9 @@ return {
 	{trig = "!cdefn", snippetType = "autosnippet"}, 
 	fmta(
 	[[
-	    \begin{cdefn}[<>]
-		<>
-	    \end{cdefn}
+    \begin{cdefn}[<>]
+    <>
+    \end{cdefn}
 	]], 
 	{i(1), i(2)}
 	)
@@ -19,9 +19,9 @@ return {
 	{trig = "!cthrm", snippetType = "autosnippet"},
 	fmta(
 	[[ 
-	    \begin{cthrm}[<>]
-		<>
-	    \end{cthrm}
+    \begin{cthrm}[<>]
+    <>
+    \end{cthrm}
 	]],
 	{i(1), i(2)}
 	)
@@ -32,9 +32,9 @@ return {
 	{trig = "!cprop", snippetType = "autosnippet"},
 	fmta(
 	[[ 
-	    \begin{cprop}[<>]
-		<>
-	    \end{cprop}
+    \begin{cprop}[<>]
+    <>
+    \end{cprop}
 	]],
 	{i(1), i(2)}
 	)
@@ -45,9 +45,9 @@ return {
 	{trig = "!cexamp", snippetType = "autosnippet"},
 	fmta(
 	[[ 
-	    \begin{cexamp}[<>]
-		<>
-	    \end{cexamp}
+    \begin{cexamp}[<>]
+    <>
+    \end{cexamp}
 	]],
 	{i(1), i(2)}
 	)
