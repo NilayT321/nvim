@@ -128,7 +128,7 @@ return {
     -- Arrows
     -- Triggers for \xleftarrow{} and \xrightarrow{}
     s(
-        {trig = "%{(.-)%}<%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})%-<", regTrig = true, wordTrig = false, priority = 2000},
         {
             t("\\xleftarrow{"),
             f(function(_, snip) 
@@ -140,7 +140,7 @@ return {
     ),
 
     s(
-        {trig = "%{(.-)%}%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})%->", regTrig = true, wordTrig = false, priority = 2000},
         {
             t("\\xrightarrow{"),
             f(function(_, snip)
@@ -152,7 +152,7 @@ return {
     ),
 
     s(
-        {trig = "%{(.-)%}|%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})|%->", regTrig = true, wordTrig = false, priority = 2000},
         {
             t("\\xmapsto{"),
             f(function(_, snip)

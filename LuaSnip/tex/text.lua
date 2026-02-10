@@ -21,7 +21,7 @@ return {
     
     -- Boldfaced text: should determine \mathbf or \textbf from context
     s(
-        {trig = "%{(.-)%}b", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})b", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip) 
                 local content = snip.captures[1] 
@@ -36,7 +36,7 @@ return {
 
     -- Italicized text in math/regular mode 
     s(
-        {trig = "%{(.-)%}it", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})it", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip)
                 local content = snip.captures[1] 
@@ -51,20 +51,20 @@ return {
     
     -- Overline text 
     s(
-        {trig = "%{(.-)%}%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})-", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\overline{"),
-            f(function(_, snip) 
-                return snip.captures[1]
+            f(function(_, snip)
+                local prefix  = snip.captures[1]
+                local content = snip.captures[2]:sub(-2,2)
+                return prefix .. "\\overline{" .. content .. "}"
             end),
-            t("}")
         },
         {condition = in_mathzone}
     ),
 
     -- Widehat text 
     s(
-        {trig = "%{(.-)%}%^", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\])(%b{})^", regTrig = true, wordTrig = false, priority = 2000},
         {
             t("\\widehat{"),
             f(function(_, snip)
