@@ -25,6 +25,12 @@ return {
             return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
         end
 
+        -- This helper function is used in several of the text based snippets 
+        -- To return prefix and content from expansion 
+        function get_snippet_prefix_and_content(snip) 
+            return snip.captures[1], snip.captures[2]
+        end
+
         vim.keymap.set({ "i", "s" }, "<C-K>", function()
           if ls.expand_or_jumpable() then
             ls.expand_or_jump()

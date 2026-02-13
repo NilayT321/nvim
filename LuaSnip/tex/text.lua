@@ -21,29 +21,32 @@ return {
     
     -- Boldfaced text: should determine \mathbf or \textbf from context
     s(
-        {trig = "%{(.-)%}b", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w]){(.-)}b", regTrig = true, wordTrig = false},
         {
-            f(function(_, snip) 
-                local content = snip.captures[1] 
-                if in_mathzone() then
-                    return "\\mathbf{" .. content .. "}"
+            f(function(_, snip)
+                local prefix, content = get_snippet_prefix_and_content(snip)
+
+                if in_mathzone() or prefix == "$" then 
+                    return prefix .. "\\mathbf{" .. content .."}"
                 else 
-                    return "\\textbf{" .. content .. "}"
+                    return prefix .. "\\textbf{" .. content .. "}"
                 end
             end)
         }
     ),
 
+
     -- Italicized text in math/regular mode 
     s(
-        {trig = "%{(.-)%}it", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w]){(.-)}it", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip)
-                local content = snip.captures[1] 
-                if in_mathzone() then 
-                    return "\\mathit{" .. content .. "}"
+                local prefix, content = get_snippet_prefix_and_content(snip)
+
+                if in_mathzone() or prefix == "$" then 
+                    return prefix .. "\\mathit{" .. content .. "}"
                 else 
-                    return "\\textit{" .. content .. "}"
+                    return prefix .. "\\textit{" .. content .. "}"
                 end
             end)
         }
@@ -51,26 +54,24 @@ return {
     
     -- Overline text 
     s(
-        {trig = "%{(.-)%}%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w]){(.-)}%-", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\overline{"),
-            f(function(_, snip) 
-                return snip.captures[1]
-            end),
-            t("}")
+            f(function(_, snip)
+                local prefix, content = get_snippet_prefix_and_content(snip)
+                return prefix .. "\\overline{" .. content .. "}"
+            end)
         },
         {condition = in_mathzone}
     ),
 
     -- Widehat text 
     s(
-        {trig = "%{(.-)%}%^", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w]){(.-)}%^", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\widehat{"),
-            f(function(_, snip)
-                return snip.captures[1]
-            end),
-            t("}")
+            f(function(_, snip) 
+                local prefix, content = get_snippet_prefix_and_content(snip)
+                return prefix .. "\\widehat{" .. content .. "}"
+            end)
         },
         {condition = in_mathzone}
     ),
