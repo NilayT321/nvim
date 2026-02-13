@@ -128,37 +128,34 @@ return {
     -- Arrows
     -- Triggers for \xleftarrow{} and \xrightarrow{}
     s(
-        {trig = "%{(.-)%}<%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_]){(.-)}<%-", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\xleftarrow{"),
             f(function(_, snip) 
-                return snip.captures[1]
-            end),
-            t("}"),
+                local prefix, content = get_snippet_prefix_and_content(snip)
+                return prefix .. "\\xrightarrow{" .. content .. "}"
+            end)
         },
         {condition = in_mathzone}
     ),
 
     s(
-        {trig = "%{(.-)%}%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_]){(.-)}%->", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\xrightarrow{"),
-            f(function(_, snip)
-                return snip.captures[1]
-            end),
-            t("}")
+            f(function(_, snip) 
+                local prefix, content = get_snippet_prefix_and_content(snip)
+                return prefix .. "\\xrightarrow{" .. content .. "}"
+            end)
         },
         {condition = in_mathzone}
     ),
 
     s(
-        {trig = "%{(.-)%}|%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_]){(.-)}|%->", regTrig = true, wordTrig = false, priority = 2000},
         {
-            t("\\xmapsto{"),
             f(function(_, snip)
-                return snip.captures[1]
-            end),
-            t("}")
+                local prefix, content = get_snippet_prefix_and_content(snip) 
+                return prefix .. "\\xmapsto{" .. content .. "}"
+            end)
         },
         {condition = in_mathzone}
     ),
