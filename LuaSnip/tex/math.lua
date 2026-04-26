@@ -82,7 +82,34 @@ return {
         {trig = "Int",},
         fmta("\\bigcap_{<>}^{<>}", {i(1), i(2)}),
         {condition = in_mathzone}
+    ),
 
+    -- Big wedge 
+    s(
+        {trig = "^",},
+        fmta("\\bigwedge_{<>}^{<>}", {i(1), i(2)}),
+        {condition = in_mathzone}
+    ),
+
+    -- Big vee 
+    s(
+        {trig = "v",},
+        fmta("\\bigvee_{<>}^{<>}", {i(1), i(2)}),
+        {condition = in_mathzone}
+    ),
+    
+    -- Direct sum/oplus 
+    s(
+        {trig = "o+",},
+        fmta("\\bigoplus_{<>}^{<>}", {i(1), i(2)}),
+        {condition = in_mathzone}
+    ), 
+
+    -- Tensor product/otimes 
+    s(
+        {trig = "ox",},
+        fmta("\\bigotimes_{<>}^{<>}", {i(1), i(2)}),
+        {condition = in_mathzone}
     ),
 
     -- Left and right parentheses
@@ -128,7 +155,7 @@ return {
     -- Arrows
     -- Triggers for \xleftarrow{} and \xrightarrow{}
     s(
-        {trig = "([^\\%w_]){(.-)}<%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}<%-", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip) 
                 local prefix, content = get_snippet_prefix_and_content(snip)
@@ -139,7 +166,7 @@ return {
     ),
 
     s(
-        {trig = "([^\\%w_]){(.-)}%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}%->", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip) 
                 local prefix, content = get_snippet_prefix_and_content(snip)
@@ -150,7 +177,7 @@ return {
     ),
 
     s(
-        {trig = "([^\\%w_]){(.-)}|%->", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}|%->", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip)
                 local prefix, content = get_snippet_prefix_and_content(snip) 

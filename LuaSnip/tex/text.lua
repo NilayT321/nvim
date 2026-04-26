@@ -21,7 +21,7 @@ return {
     
     -- Boldfaced text: should determine \mathbf or \textbf from context
     s(
-        {trig = "([^\\%w_]){(.-)}b", regTrig = true, wordTrig = false},
+        {trig = "([^\\%w_^+]){(.-)}b", regTrig = true, wordTrig = false},
         {
             f(function(_, snip)
                 local prefix, content = get_snippet_prefix_and_content(snip)
@@ -38,7 +38,7 @@ return {
 
     -- Italicized text in math/regular mode 
     s(
-        {trig = "([^\\%w_]){(.-)}it", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}it", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip)
                 local prefix, content = get_snippet_prefix_and_content(snip)
@@ -51,10 +51,26 @@ return {
             end)
         }
     ),
+
+    -- Typewriter text in math/regular mode 
+    s(
+        {trig = "([^\\%w_^+]){(.-)}tt", regTrig = true, wordTrig = false, priority = 2000},
+        {
+            f(function(_, snip)
+                local prefix, content = get_snippet_prefix_and_content(snip)
+
+                if in_mathzone() or prefix == "$" then 
+                    return prefix .. "\\mathtt{" .. content .. "}"
+                else 
+                    return prefix .. "\\texttt{" .. content .. "}"
+                end
+            end)
+        }
+    ),
     
     -- Overline text 
     s(
-        {trig = "([^\\%w_]){(.-)}%-", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}%-", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip)
                 local prefix, content = get_snippet_prefix_and_content(snip)
@@ -66,7 +82,7 @@ return {
 
     -- Widehat text 
     s(
-        {trig = "([^\\%w_]){(.-)}%^", regTrig = true, wordTrig = false, priority = 2000},
+        {trig = "([^\\%w_^+]){(.-)}%^", regTrig = true, wordTrig = false, priority = 2000},
         {
             f(function(_, snip) 
                 local prefix, content = get_snippet_prefix_and_content(snip)

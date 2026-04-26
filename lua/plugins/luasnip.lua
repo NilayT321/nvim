@@ -6,6 +6,10 @@ return {
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
 
+    dependencies = {
+        "rafamadriz/friendly-snippets"
+    },
+
     opts = {
         enable_autosnippets = true,
         store_selection_keys = "<Tab>",
@@ -49,5 +53,7 @@ return {
         -- Lazy load snippets
         require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
         require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip"})
+        require("luasnip.loaders.from_vscode").load({exclude = "latex"})
+        require("luasnip.loaders.from_vscode").lazy_load({})
     end
 }

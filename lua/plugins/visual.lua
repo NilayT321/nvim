@@ -1,11 +1,14 @@
 return{ 
 	-- Colorscheme 
 	{
-		"navarasu/onedark.nvim",
-		priority = 1000, -- make sure to load this before all the other start plugins
-		opts = {style = 'darker'},
+		"catppuccin/nvim",
+        name = "catppuccin",
+		priority = 1000, 
+        opts = {
+            auto_integrations = true,
+        },
 		init = function() 
-		vim.cmd.colorscheme("onedark")
+            vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
 	
