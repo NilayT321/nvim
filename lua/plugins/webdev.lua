@@ -41,23 +41,12 @@ return {
       },
     },
 
-    -- web-dev tools
     {
-	'ray-x/web-tools.nvim',
-	opts = {
-	    keymaps = {
-		rename = nil, 
-		repeat_rename = '.',
-	    },
-	    hurl = {  -- hurl default
-		show_headers = false, -- do not show http headers
-		floating = false,   -- use floating windows (need guihua.lua)
-		json5 = false,      -- use json5 parser require json5 treesitter
-		formatters = {  -- format the result by filetype
-		    json = { 'jq' },
-		    html = { 'prettier', '--parser', 'html' },
-		},
-	    },
-	},
-    },
+        'brianhuster/live-preview.nvim',
+        dependencies = {
+            -- You can choose one of the following pickers
+            'nvim-telescope/telescope.nvim',
+        },
+    }
+
 }
